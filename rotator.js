@@ -99,6 +99,8 @@ var amountRotated = {};
 var originalpos = {};
 var popDistance = {};
 
+var inArchive = false;
+
 var levels = {
     0.3: true,
     0.45: true,
@@ -112,7 +114,10 @@ function update()
     var time = clock.getElapsedTime();
 	var moveDistance = 20 * delta; // 200 pixels per second
 	var rotateAngle = Math.PI / 2 * delta;   // pi/2 radians (90 degrees) per second
-
+    if(inArchive) {
+        popTimer -= 14;
+        inArchive  = false;
+    }
     if(isosp) {
         // isosp.rotation.x += delta/2;
         isosp.rotation.z += delta;
@@ -120,7 +125,7 @@ function update()
 
     popTimer -= delta;
     if(popTimer <= 0 && popping.length != isosp.children.length) {
-        popTimer = 2;
+        popTimer += 2;
         var index;
         do {
             index = Math.floor(Math.random()*isosp.children.length);
