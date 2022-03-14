@@ -34,7 +34,7 @@ a {
     font-family: monospace;
     color: #333;
     padding: 15px 0;
-    font-size: 14pt;
+    font-size: 13pt;
     /* padding-left: 0; */
     transition: 0.5s;
 }
@@ -61,4 +61,8 @@ canvas {
 
 .hidden {
     display: none;
+}
+
+canvas {
+    position: fixed;
 }
