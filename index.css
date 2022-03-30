@@ -17,7 +17,7 @@ body {
     color: #333;
     /* margin: 0; */
     /* margin-bottom: 0 !important; */
-    margin-bottom: 50px;
+    margin-bottom: 15px;
 }
 
 hr {
@@ -72,4 +72,10 @@ canvas {
     width: 100%;
     display: flex;
     justify-content: space-between;
+}
+
+p {
+    color: #888;
+    font-size: 13pt;
+    font-family: monospace;
 }
