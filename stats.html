@@ -6,8 +6,21 @@
     <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-firestore.js"></script>
 </head>
 <body>
-    <div id="toprow">
-        <p id="menulabel">Menu Loads: </p>
+    <p class="bg" style="transform: translateY(-100px);" >Moments</p>
+    <p class="bg" style="transform: translateY(100px);" >Stats</p>
+    <div id="bigcounter" class="it">
+        <p >Site Loads: </p>
+        <p id="menulabel" style="font-size: 24pt;">...</p>
+        <p style="margin-top: 40px;">Moment Reads: </p>
+        <p id="readslabel" style="font-size: 24pt;">...</p>
     </div>
+    <div style="width: 1px; height: 50%; background-color: white; margin: 30px;"></div>
+    <div class="it">
+        <canvas id="myChart" width="400"></canvas>
+    </div>
+    </div>
+<script>
+</script>
 </body>
+<script src="chart.min.js"></script>
 <script src="stats.js"></script>
