@@ -21,7 +21,7 @@ initFirestore();
 
 function logVisit() {
     db.collection("moments").add({
-        action: "menuload",
+        moment: "menu",
         time: firebase.firestore.FieldValue.serverTimestamp()
     })
     .then((docRef) => {
