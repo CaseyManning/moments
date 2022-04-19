@@ -58,7 +58,7 @@ function loadChart() {
 
     var dx = [];
     var dy = [];
-    for (const [key, value] of Object.entries(usageData)) {
+    for (const [key, value] of Object.entries(usageData).sort(([k1, v1], [k2, v2]) => v2 - v1)) {
         if(key != "menu") {
             dx.push(key)
             dy.push(value);
