@@ -104,7 +104,7 @@ function loadChart() {
                 label: 'Recents',
                 data: dy2,
                 backgroundColor: [
-                    'rgba(186, 240, 177, 1)'
+                    'rgba(171, 240, 127, 1)'
                 ],
                 borderWidth: 0,
             }]
