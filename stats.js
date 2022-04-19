@@ -30,7 +30,7 @@ function readUsageData() {
             if(!usageDataRecent[data.moment]) {
                 usageDataRecent[data.moment] = 0;
             }
-            if(current.getTime() / 1000 - data.time.seconds < 8000) {
+            if(current.getTime() / 1000 - data.time.seconds < 86400) {
                 usageDataRecent[data.moment] += 1;
             }
             if(!usageData[data.moment]) {
