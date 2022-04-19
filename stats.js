@@ -13,6 +13,8 @@ function initFirestore() {
 
 var usageData = {}
 
+var usageDataRecent = {}
+
 function readUsageData() {
     db.collection("moments").get().then((querySnapshot) => {
 
@@ -21,6 +23,16 @@ function readUsageData() {
         querySnapshot.forEach((doc) => {
             console.log(doc.id, " => ", doc.data());
             var data = doc.data();
+            
+            var current = new Date();
+            console.log(current.getTime() / 1000)
+            console.log( data.time.seconds);
+            if(!usageDataRecent[data.moment]) {
+                usageDataRecent[data.moment] = 0;
+            }
+            if(current.getTime() / 1000 - data.time.seconds < 8000) {
+                usageDataRecent[data.moment] += 1;
+            }
             if(!usageData[data.moment]) {
                 usageData[data.moment] = 1;
             } else {
@@ -61,11 +73,22 @@ function loadChart() {
     for (const [key, value] of Object.entries(usageData).sort(([k1, v1], [k2, v2]) => v2 - v1)) {
         if(key != "menu") {
             dx.push(key)
-            dy.push(value);
+            dy.push(value - usageDataRecent[key]);
         }
     }
 
-    const myChart = new Chart(ctx, {
+    var dy2 = [];
+    for (const [key, value] of Object.entries(usageData).sort(([k1, v1], [k2, v2]) => v2 - v1)) {
+        if(key != "menu") {
+            if(usageDataRecent[key]) {
+                dy2.push(usageDataRecent[key]);
+            } else {
+                dy2.push(0);
+            }
+        }
+    }
+
+    const myChart = new Chart(ctx, {            //TODO: make recent reads a color on the bar chart
         type: 'bar',
         data: {
             labels: dx,
@@ -74,6 +97,14 @@ function loadChart() {
                 data: dy,
                 backgroundColor: [
                     'rgba(255, 255, 255, 1)'
+                ],
+                borderWidth: 0,
+            },
+            {
+                label: 'Recents',
+                data: dy2,
+                backgroundColor: [
+                    'rgba(186, 240, 177, 1)'
                 ],
                 borderWidth: 0,
             }]
@@ -90,13 +121,15 @@ function loadChart() {
                             size: 15,
                             family: 'Quicksand'
                         }
-                    }
+                    },
+                    stacked: true
                 },
                 x: {
                     ticks: {
                         color: 'rgba(0,0,0,0);',
                         display: false
-                    }
+                    },
+                    stacked: true,
                 }
             },
             plugins: {  // 'legend' now within object 'plugins {}'
