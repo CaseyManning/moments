@@ -56,6 +56,7 @@ a:hover {
 canvas {
     position: absolute;
     z-index: 0;
+    cursor: pointer;
 }
 
 .hidden {
