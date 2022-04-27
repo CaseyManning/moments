@@ -170,7 +170,8 @@ function loadTimeChart() {
     var currentDay = Math.floor((new Date().getTime() / 1000) / 86400);
 
     for(var i = currentDay-30; i < currentDay; i++) {
-        labels.push(i)
+        var day = new Date(i*86400*1000);
+        labels.push(day.toISOString().substring(0, 10))
         if(usagePerDay[i]) {
             data.push(usagePerDay[i])
         } else {
@@ -179,8 +180,6 @@ function loadTimeChart() {
     }
 
     const ctx = document.getElementById('timeChart').getContext('2d');
-
-    console.log(labels)
 
     const myChart = new Chart(ctx, { 
         type: 'line',
