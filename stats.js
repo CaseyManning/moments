@@ -13,7 +13,9 @@ function initFirestore() {
 
 var usageData = {}
 
-var usageDataRecent = {}
+var usageDataRecent = {};
+
+var usagePerDay = {};
 
 function readUsageData() {
     db.collection("moments").get().then((querySnapshot) => {
@@ -21,12 +23,9 @@ function readUsageData() {
         var totalReads = 0;
 
         querySnapshot.forEach((doc) => {
-            console.log(doc.id, " => ", doc.data());
             var data = doc.data();
             
             var current = new Date();
-            console.log(current.getTime() / 1000)
-            console.log( data.time.seconds);
             if(!usageDataRecent[data.moment]) {
                 usageDataRecent[data.moment] = 0;
             }
@@ -40,6 +39,13 @@ function readUsageData() {
             }
             if(data.moment != "menu") {
                 totalReads += 1;
+
+                var day = Math.floor(data.time.seconds / 86400);
+                if(!usagePerDay[day]) {
+                    usagePerDay[day] = 1
+                } else {
+                    usagePerDay[day] += 1;
+                }
             }
         });
 
@@ -58,6 +64,8 @@ function readUsageData() {
 
         // label.remove();
         loadChart();
+        loadTimeChart();
+
     });
 }
 console.log(usageData)
@@ -134,6 +142,7 @@ function loadChart() {
             },
             plugins: {  // 'legend' now within object 'plugins {}'
                 legend: {
+                    display: false,
                   labels: {
                       display: false,
                     color: "blue",  // not 'fontColor:' anymore
@@ -146,4 +155,90 @@ function loadChart() {
               },
         }
     });
+}
+
+function loadTimeChart() {
+
+    var labels = [];
+    var data = [];
+
+    // for (const [key, value] of Object.entries(usagePerDay)) {
+    //     labels.push(key)
+    //     data.push(value);
+    // }
+
+    var currentDay = Math.floor((new Date().getTime() / 1000) / 86400);
+
+    for(var i = currentDay-30; i < currentDay; i++) {
+        labels.push(i)
+        if(usagePerDay[i]) {
+            data.push(usagePerDay[i])
+        } else {
+            data.push(0);
+        }
+    }
+
+    const ctx = document.getElementById('timeChart').getContext('2d');
+
+    console.log(labels)
+
+    const myChart = new Chart(ctx, { 
+        type: 'line',
+        data: {
+          labels: labels,
+          datasets: [{ 
+              data: data,
+              label: "Views",
+              borderColor: "#fff",
+              backgroundColor: "#fff",
+              fill: false,
+              pointRadius: 1,
+              pointHoverRadius: 8
+            }
+          ]
+        },
+        options: {
+          title: {
+            display: false
+          },
+          scales: {
+            y: {
+                beginAtZero: true,
+                ticks: {
+                    color: 'white',
+                    font: {
+                        size: 15,
+                        family: 'Quicksand'
+                    },
+                    stepSize: 10
+                },
+                stacked: true,
+                grid: {
+                    color: 'rgba(255,255,255,0)',
+                }
+            },
+            x: {
+                ticks: {
+                    color: 'rgba(0,0,0,0);',
+                    display: false
+                },
+                stacked: true,
+                grid: {
+                    color: 'rgba(255,255,255,0)',
+                }
+            }
+        },
+        plugins: {  // 'legend' now within object 'plugins {}'
+            legend: {
+                display: false,
+              labels: {
+                  display: false,
+                  font: {
+                    size: 0 // 'size' now within object 'font {}'
+                  }
+              }
+            }
+          },
+        },
+      });     
 }

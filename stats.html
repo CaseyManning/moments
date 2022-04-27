@@ -8,15 +8,20 @@
 <body>
     <p class="bg" style="transform: translateY(-100px);" >Moments</p>
     <p class="bg" style="transform: translateY(100px);" >Stats</p>
-    <div id="bigcounter" class="it">
-        <p >Site Loads: </p>
-        <p id="menulabel" style="font-size: 24pt;">...</p>
-        <p style="margin-top: 40px;">Moment Reads: </p>
-        <p id="readslabel" style="font-size: 24pt;">...</p>
+    <div class="half">
+        <div id="bigcounter" class="it" style="width: 200px;">
+            <p >Site Loads: </p>
+            <p id="menulabel" style="font-size: 24pt;">...</p>
+            <p style="margin-top: 40px;">Moment Reads: </p>
+            <p id="readslabel" style="font-size: 24pt;">...</p>
+        </div>
+        <div style="width: 2px; height: 90%; background-color: white; margin: 50px;"></div>
+        <div class="it">
+            <canvas id="myChart" width="400" height="300"></canvas>
+        </div>
     </div>
-    <div style="width: 1px; height: 50%; background-color: white; margin: 30px;"></div>
-    <div class="it">
-        <canvas id="myChart" width="400" height="300"></canvas>
+    <div class="half">
+        <canvas id="timeChart" width="600" height="200"></canvas>
     </div>
     </div>
 <script>

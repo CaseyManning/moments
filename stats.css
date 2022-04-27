@@ -27,6 +27,13 @@ body {
     margin: 0;
     overflow: hidden;
     display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.half {
+    display: flex;
     flex-direction: row;
     align-items: center;
     justify-content: center;
@@ -35,7 +42,7 @@ body {
 .bg {
     font-family: 'Neon';
     color: rgb(28, 28, 28);
-    font-size: 120pt;
+    font-size: 140pt;
     position: absolute;
     z-index: -1;
 }
