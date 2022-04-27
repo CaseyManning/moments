@@ -192,7 +192,8 @@ function loadTimeChart() {
               backgroundColor: "#fff",
               fill: false,
               pointRadius: 1,
-              pointHoverRadius: 8
+              pointHoverRadius: 8,
+              lineTension: 0.2,
             }
           ]
         },
