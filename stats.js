@@ -242,3 +242,23 @@ function loadTimeChart() {
         },
       });     
 }
+
+async function fetchAsync (url) {
+    var dat = "";
+    let response = await fetch(url,
+        {
+            method: 'POST', // *GET, POST, PUT, DELETE, etc.
+            mode: 'cors', // no-cors, *cors, same-origin
+            cache: 'no-cache', // *default, no-cache, reload, force-cache, only-if-cached
+            credentials: 'same-origin', // include, *same-origin, omit
+            headers: {
+              'Content-Type': 'application/json',
+              'Authorization': 'Token 7866371b-1813-4c4e-a0e3-e043373aa270', // manual, *follow, error
+              // 'Content-Type': 'application/x-www-form-urlencoded',
+            },
+            referrerPolicy: 'no-referrer', // no-referrer, *no-referrer-when-downgrade, origin, origin-when-cross-origin, same-origin, strict-origin, strict-origin-when-cross-origin, unsafe-url
+            body: JSON.stringify(dat) // body data type must match "Content-Type" header
+    });
+    let data = await response.json();
+    return data;
+  }
