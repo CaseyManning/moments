@@ -253,7 +253,7 @@ async function fetchAsync (url) {
             credentials: 'same-origin', // include, *same-origin, omit
             headers: {
               'Content-Type': 'application/json',
-              'Authorization': 'Token 7866371b-1813-4c4e-a0e3-e043373aa270', // manual, *follow, error
+              'Authorization': 'Token ---', // manual, *follow, error
               // 'Content-Type': 'application/x-www-form-urlencoded',
             },
             referrerPolicy: 'no-referrer', // no-referrer, *no-referrer-when-downgrade, origin, origin-when-cross-origin, same-origin, strict-origin, strict-origin-when-cross-origin, unsafe-url
