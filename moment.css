@@ -1,0 +1,13 @@
+tw-story
+{
+    background-color: white;
+    color: #333;
+  	font-size: 13pt;
+ 	padding: 10% 25px;
+	max-width: 900px;
+  	margin: auto;
+   	font-family: 'Gill Sans', monospace;
+}
+tw-sidebar {
+  display: none;
+}
