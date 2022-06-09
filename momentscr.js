@@ -9,9 +9,15 @@ if(document.cookie != "casey") {
         
     db = firebase.firestore();
 
+    var source = "unknown";
+    if(window.location.toString().includes("utm_medium=email")) {
+        source = "email"
+    }
+
     db.collection("moments").add({
         moment: document.title,
-        time: firebase.firestore.FieldValue.serverTimestamp()
+        time: firebase.firestore.FieldValue.serverTimestamp(),
+        source: source
     })
     .then((docRef) => {
         console.log("Document written with ID: ", docRef.id);
