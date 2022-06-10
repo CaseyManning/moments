@@ -15,6 +15,8 @@ var usageData = {}
 
 var usageDataRecent = {};
 
+var usageDataEmail = {};
+
 var usagePerDay = {};
 
 function readUsageData() {
@@ -28,15 +30,21 @@ function readUsageData() {
             var current = new Date();
             if(!usageDataRecent[data.moment]) {
                 usageDataRecent[data.moment] = 0;
+                usageDataEmail[data.moment] = 0;
             }
             if(current.getTime() / 1000 - data.time.seconds < 86400) {
                 usageDataRecent[data.moment] += 1;
+            } else if(data.source == "email") {
+                usageDataEmail[data.moment] += 1;
+                console.log("key")
             }
+
             if(!usageData[data.moment]) {
                 usageData[data.moment] = 1;
             } else {
                 usageData[data.moment] += 1;
             }
+            
             if(data.moment != "menu") {
                 totalReads += 1;
 
@@ -81,26 +89,45 @@ function loadChart() {
     for (const [key, value] of Object.entries(usageData).sort(([k1, v1], [k2, v2]) => v2 - v1)) {
         if(key != "menu") {
             dx.push(key)
-            dy.push(value - usageDataRecent[key]);
+            dy.push(value - usageDataRecent[key] - usageDataEmail[key]);
         }
     }
 
-    var dy2 = [];
+    var dyRecent = [];
     for (const [key, value] of Object.entries(usageData).sort(([k1, v1], [k2, v2]) => v2 - v1)) {
         if(key != "menu") {
             if(usageDataRecent[key]) {
-                dy2.push(usageDataRecent[key]);
+                dyRecent.push(usageDataRecent[key]);
             } else {
-                dy2.push(0);
+                dyRecent.push(0);
             }
         }
     }
 
-    const myChart = new Chart(ctx, {            //TODO: make recent reads a color on the bar chart
+    var dyEmail = [];
+    for (const [key, value] of Object.entries(usageData).sort(([k1, v1], [k2, v2]) => v2 - v1)) {
+        if(key != "menu") {
+            if(usageDataEmail[key]) {
+                dyEmail.push(usageDataEmail[key]);
+            } else {
+                dyEmail.push(0);
+            }
+        }
+    }
+
+    const myChart = new Chart(ctx, {
         type: 'bar',
         data: {
             labels: dx,
             datasets: [{
+                label: 'From Email',
+                data: dyEmail,
+                backgroundColor: [
+                    'rgba(208, 242, 245, 1)'
+                ],
+                borderWidth: 0,
+            },
+            {
                 label: 'Views',
                 data: dy,
                 backgroundColor: [
@@ -110,12 +137,13 @@ function loadChart() {
             },
             {
                 label: 'Recents',
-                data: dy2,
+                data: dyRecent,
                 backgroundColor: [
                     'rgba(171, 240, 127, 1)'
                 ],
                 borderWidth: 0,
-            }]
+            }
+            ]
         },
         options: {
             indexAxis: 'y',
