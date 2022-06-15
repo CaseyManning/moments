@@ -1,7 +1,5 @@
 var scene = new THREE.Scene();
 
-var boxGeometry = new THREE.BoxGeometry(2, 2, 2);
-
 var basicMaterial = new THREE.MeshPhongMaterial({
      color: 0x000000,
      specular: 0x555555,

@@ -24,19 +24,26 @@ function readUsageData() {
 
         var totalReads = 0;
 
+        var totalEmailReads = 0;
+
         querySnapshot.forEach((doc) => {
             var data = doc.data();
             
             var current = new Date();
             if(!usageDataRecent[data.moment]) {
                 usageDataRecent[data.moment] = 0;
+            }
+            if(!usageDataEmail[data.moment]) {
                 usageDataEmail[data.moment] = 0;
             }
             if(current.getTime() / 1000 - data.time.seconds < 86400) {
                 usageDataRecent[data.moment] += 1;
             } else if(data.source == "email") {
                 usageDataEmail[data.moment] += 1;
-                console.log("key")
+                console.log(usageDataEmail[data.moment])
+            }
+            if(data.source == "email") {
+                totalEmailReads += 1;
             }
 
             if(!usageData[data.moment]) {
@@ -63,6 +70,9 @@ function readUsageData() {
 
         var label = document.getElementById("readslabel");
         label.innerHTML = totalReads;
+
+        var label = document.getElementById("emaillabel");
+        label.innerHTML = totalEmailReads;
 
         // for (const [key, value] of Object.entries(usageData)) {
         //     newelement = label.cloneNode(false);
