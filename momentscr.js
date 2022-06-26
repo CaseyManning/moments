@@ -32,4 +32,4 @@ var html = `
   </div>
 `;
 
-document.body.insertAdjacentHTML('beforeend', html);
+// document.body.insertAdjacentHTML('beforeend', html);

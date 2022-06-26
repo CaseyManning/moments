@@ -36,7 +36,7 @@ function readUsageData() {
             if(!usageDataEmail[data.moment]) {
                 usageDataEmail[data.moment] = 0;
             }
-            if(current.getTime() / 1000 - data.time.seconds < 86400) {
+            if(current.getTime() / 1000 - data.time.seconds < 86400*2) {
                 usageDataRecent[data.moment] += 1;
             } else if(data.source == "email") {
                 usageDataEmail[data.moment] += 1;
