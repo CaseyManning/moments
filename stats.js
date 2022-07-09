@@ -158,6 +158,7 @@ function loadChart() {
         options: {
             indexAxis: 'y',
             maxBarThickness: '15',
+            scaleShowValues: true,
             scales: {
                 y: {
                     beginAtZero: true,
@@ -165,8 +166,9 @@ function loadChart() {
                         color: 'white',
                         font: {
                             size: 15,
-                            family: 'Quicksand'
-                        }
+                            family: 'Quicksand',
+                        },
+                        autoSkip: false
                     },
                     stacked: true
                 },
