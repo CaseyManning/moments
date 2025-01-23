@@ -26,10 +26,11 @@ if(document.cookie != "casey") {
         console.error("Error adding document: ", error);
     });
 }
+
 var html = `
   <div class="sidebar">
   <img src="momentimgs/` + (document.title) + `.png">
-  </div>
+  </div> 
 `;
 
 // document.body.insertAdjacentHTML('beforeend', html);
