@@ -180,7 +180,7 @@ function loadChart() {
                     stacked: true,
                 }
             },
-            plugins: {  // 'legend' now within object 'plugins {}'
+            plugins: { 
                 legend: {
                     display: false,
                   labels: {

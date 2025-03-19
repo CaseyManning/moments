@@ -67,3 +67,8 @@ img {
     image-rendering: pixelated;
     user-select: none;
 }
+
+.it {
+    height: 300px;
+    overflow-y: scroll;
+}
