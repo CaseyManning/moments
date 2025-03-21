@@ -28,9 +28,10 @@ if(document.cookie != "casey") {
 }
 
 var html = `
-  <div class="sidebar">
-  <img src="momentimgs/` + (document.title) + `.png">
-  </div> 
+  <div class="footer">
+  </div>
 `;
 
-// document.body.insertAdjacentHTML('beforeend', html);
+window.addEventListener('load', function() {
+    document.body.appendChild(document.createElement('div')).innerHTML = html;
+});
