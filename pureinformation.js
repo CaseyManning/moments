@@ -503,7 +503,7 @@ const messages = [
     "Oh Casey of course",
     "ITS SO CUTE🥹🥹 i love this casey",
     "omg casey lives in one of the furthest row houses",
-    "And the Casey corroberation??? This case is closed",
+    "And the Casey corroboration??? This case is closed",
     "Casey she's SO FUCKING CUTEEEEE",
     "NOOOO casey dont give up",
     "\"Listen. Casey. This character needs less gender.\"",
@@ -725,8 +725,13 @@ document.addEventListener("keypress", (e) => {
 function shuffle() {
     for (let i = 0; i < textSpans.length; i++) {
         const y = textSpans[i].getBoundingClientRect().y;
-        
-        const dist = y;
+
+        if(y < -50) {
+            document.getElementById("message-container").removeChild(textSpans[i].parentElement);
+            textSpans.splice(i, 1);
+            i--;
+            continue;
+        }
 
         const orig = textSpans[i].title;
         
