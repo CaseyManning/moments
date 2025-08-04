@@ -347,7 +347,7 @@ const messages = [
     "caseyy idk how taxes work i need to call my dad",
     "casey i was speaking at like two words per second",
     "casey they blundered i think u just have to roll with it",
-    "o shit casey it might be extra over for u if ur sick again by the time the dagny reschedule date comes around",
+    "o shit casey it might be extra over for u if ur sick again by the time the reschedule date comes around",
     "casey it’s basically on the calendar",
     "caseyy don’t text ur ex",
     "also caseyyy my goose is so fucking cooked for finals",
@@ -576,6 +576,8 @@ function chooseMessage() {
 
 }
 
+let textSpans = [];
+
 function createNewMessage() {
     let newMessage = chooseMessage();
     while (newMessage.preMayaNumCharacters >= 20 && newMessage.postMayaNumCharacters >= 30) {
@@ -599,7 +601,8 @@ function createNewMessage() {
     leftSpan.innerText = newMessage.preMaya.join(" ");
     newDiv.appendChild(leftSpan);
     leftSpan.style.transform = "translateY(0px)";
-
+    leftSpan.title = leftSpan.innerText;
+    textSpans.push(leftSpan);
 
     // CENTER
     const centerSpan = document.createElement("span");
@@ -609,7 +612,8 @@ function createNewMessage() {
     newDiv.appendChild(centerSpan);
     const randomDuration = Math.floor(Math.random() * 9) + 2;
     centerSpan.style.animation = `fadeIn ${randomDuration}s infinite`;
-
+    centerSpan.title = centerSpan.innerText;
+    textSpans.push(centerSpan);
     // RIGHT
     const rightSpan = document.createElement("span");
     rightSpan.classList.add("flex-item");
@@ -617,8 +621,10 @@ function createNewMessage() {
     rightSpan.innerText = newMessage.postMaya.join(" ");
     newDiv.appendChild(rightSpan);
     rightSpan.style.transform = "translateY(0px)";
-
+    rightSpan.title = rightSpan.innerText;
+    textSpans.push(rightSpan);
     document.getElementById("message-container").appendChild(newDiv); // ☆
+    shuffle();
 }
 
 function ready() {
@@ -633,5 +639,29 @@ document.addEventListener("keypress", (e) => {
     // }
     createNewMessage();
 });
+
+function shuffle() {
+    for (let i = 0; i < textSpans.length; i++) {
+        const y = textSpans[i].getBoundingClientRect().y;
+        
+        const dist = y;
+
+        const orig = textSpans[i].title;
+        
+        const factor = (window.innerHeight - y) / window.innerHeight / 2 - 0.3;
+        let newText = "";
+
+        for(let j = 0; j < orig.length; j++) {
+        const char = orig[j];
+        if(Math.random() < factor) {
+            newText += orig[Math.floor(Math.random() * orig.length)];
+        } else {
+            newText += char;
+        }
+        }
+
+        textSpans[i].textContent = newText;
+    }
+}
 
 ready();
