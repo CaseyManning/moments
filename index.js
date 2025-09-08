@@ -1,5 +1,46 @@
 var db;
 
+const moments = [
+    "bathroom",
+    "phonecall",
+    "tired",
+    "choosing",
+    "text",
+    "shower",
+    "songs",
+    "becoming",
+    "remember",
+    "averages",
+    "arch",
+    "jokes",
+    "ari",
+    "bye",
+    "duck",
+    "funny",
+    "chop",
+    "standing",
+    "porkbun",
+    "elevator",
+    "pancakes",
+    "nothing",
+    "book",
+    "notes",
+    "consumption",
+    "syringe",
+    "bricks",
+    "apple",
+    "canada",
+    "summer",
+    "voicenote",
+    "milk",
+    "benches",
+    "monastery",
+    "plot",
+    "trout",
+    "hands",
+    "tides"
+]
+
 function showArchives() {
     document.getElementById("box1").classList.add("hidden");
     document.getElementById("box2").classList.remove("hidden");
