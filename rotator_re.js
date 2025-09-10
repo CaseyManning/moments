@@ -163,7 +163,7 @@ window.addEventListener('mouseup', () => {
         return;
     }
     if(hoveredName) {
-        window.open("/" + hoveredName + ".html", '_blank');
+        window.open(hoveredName + ".html", '_blank');
     }
 });
 
