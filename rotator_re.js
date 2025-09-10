@@ -10,6 +10,7 @@ var basetree;
 var isosp;
 
 const momentNames = [
+    "consumption",
     "bricks",
     "apple",
     "canada",
@@ -19,9 +20,8 @@ const momentNames = [
     "plot",
     "trout",
     "hands",
-    "tides",
     "syringe",
-    "bricks",
+    "tides",
 ]
 
 const numbers = {
@@ -35,8 +35,29 @@ const numbers = {
     "apple": "0031",
     "canada": "0030",
     "bricks": "0029",
+    "consumption": "0025",
     "syringe": "0026",
 }
+
+THREE.Object3D.prototype.rotateAroundWorldAxis = function() {
+
+    var q = new THREE.Quaternion();
+
+    return function rotateAroundWorldAxis( point, axis, angle ) {
+
+        q.setFromAxisAngle( axis, angle );
+
+        this.applyQuaternion( q );
+
+        this.position.sub( point );
+        this.position.applyQuaternion( q );
+        this.position.add( point );
+
+        return this;
+
+    }
+
+}();
 
 var colorPalette = [0x391463, 0x3A0842, 0xD1462F, 0x34F6F2, 0x2541B2]
 
@@ -63,6 +84,11 @@ const hoveredMat = new THREE.MeshBasicMaterial({
     side: THREE.DoubleSide
 });
 
+const newStoryMat = new THREE.MeshBasicMaterial({
+    color: 0xcc1111,
+    wireframe: true
+});
+
 loader.load('iso_re.glb', function ( gltf ) {
 
     isosp = gltf.scene;
@@ -71,7 +97,6 @@ loader.load('iso_re.glb', function ( gltf ) {
     for(var i = isosp.children.length-1; i >= 0 ; i--) {
         
         var face = isosp.children[i];
-        console.log(face);
         var pivot = new THREE.Group();
         isosp.remove(face);
         isosp.add( pivot );
@@ -90,6 +115,10 @@ loader.load('iso_re.glb', function ( gltf ) {
 
         face.remove(face.children[1]);
         // face.children[1].material = edgeMat;
+        if(i == 0) {
+            face.firstStory = true;
+            // face.children[0].material = newStoryMat;
+        }
     }
     isosp.scale.set(4,4,4);
     // isosp.position.set(2,0, 0);
@@ -122,7 +151,7 @@ scene.add(camera)
 
 scene.background = new THREE.Color( 0xffffff );
 
-camera.filmOffset = -1;
+camera.filmOffset = -10;
 
 var renderer = new THREE.WebGLRenderer({
     antialias:true
@@ -141,8 +170,8 @@ setSize();
 
 window.addEventListener('resize', setSize);
 
-controls = new OrbitControls( camera, renderer.domElement);
-controls.autoRotate = false;
+// controls = new OrbitControls( camera, renderer.domElement);
+// controls.autoRotate = false;
 
 var raycaster = new THREE.Raycaster();
 var mouse = new THREE.Vector2(-1,1)
@@ -157,7 +186,7 @@ window.addEventListener('mousemove', (event) => {
 window.addEventListener('mousedown', () => {
     isBetweenDragAndClick = false;
 });
-window.addEventListener('mouseup', () => {
+canvasarea.addEventListener('mouseup', () => {
     if(isBetweenDragAndClick) {
         isBetweenDragAndClick = false;
         return;
@@ -171,9 +200,17 @@ var hovered = null;
 var hoveredName = null;
 
 function unhover() {
+    if(!hovered) {
+        return;
+    }
     hovered.parent.children[1].material = noHoverMat;
+    // if(hovered.parent.firstStory) {
+    //     hovered.parent.children[1].material = newStoryMat;
+    // }
+
     document.getElementById(hoveredName).blur();
     document.getElementById('td_label').style.display = "none";
+    document.getElementById('td_label2').style.display = "none";
     canvasarea.style.cursor = "default";
 }
 
@@ -198,16 +235,16 @@ function hover(objToHover, focusLink = true) {
         const label = document.getElementById('td_label');
         label.innerText = "moment " + numbers[name] + " ::: " + name;
         label.style.display = "block";
-
-        console.log(hovered.position);
-        console.log(hovered.parent.position);
+        const label2 = document.getElementById('td_label2')
+        label2.innerText = "mo " + numbers[name] + " ::: " + name;
+        label2.style.display = "block";
     }
 }
 
 function animate() {
     requestAnimationFrame( animate );
     renderer.render(scene, camera);
-    controls.update();
+    // controls.update();
 	handlePopping();
 
     if(hovered) {
@@ -217,6 +254,8 @@ function animate() {
         const screenX = ((screenPos.x + 1) / 2) * window.innerWidth;
         const screenY = ((-screenPos.y + 1) / 2) * window.innerHeight;
         label.style.translate = screenX + "px " + screenY + "px";
+        const label2 = document.getElementById('td_label2')
+        label2.style.translate = screenX + "px " + (screenY + 35) + "px";
     }
 
     if(mouse.x > -0.5) {
@@ -298,29 +337,35 @@ function handlePopping() {
         }
         popDistance[index] = dist;
         originalpos[index] = isosp.children[index].children[0].position.clone();
+        console.log('setting originalpos', originalpos[index])
 
     }
     var toRemove = [];
     for(var i of popping) {
         if(delta < 1) {
-            var elem = isosp.children[i];
-            elem.children[0].material = debugMat;
+            var elem = isosp.children[i].children[0];
             // elem.translateOnAxis(new THREE.Vector3(0,0,1), 0.001);
             if(amountMoved[i] < popDistance[i] && amountRotated[i] == 0) {
                 var moveDistance = 1 * delta;
-                elem.children[0].translateOnAxis(elem.children[0].position, moveDistance);
+                elem.translateOnAxis(elem.position, moveDistance);
                 amountMoved[i] += moveDistance;
             } else if(amountRotated[i] < 2*Math.PI) {
-                elem.rotateOnWorldAxis(new THREE.Vector3(-elem.position.y, elem.position.z, -elem.position.x).normalize(), delta)
+                const pos = originalpos[i].clone().normalize();
+                const pos2 = new THREE.Vector3(-pos.y, pos.z, -pos.x).normalize();
+                elem.rotateAroundWorldAxis(new THREE.Vector3(0,0,0), pos2, delta)
                 amountRotated[i] += delta;
+                // console.log("rotating", i)
             } else if(amountMoved[i] > 0) {
                 var moveDistance = 1 * delta;   
+                // console.log("going back", i)
                 elem.translateOnAxis(elem.position, -moveDistance);
                 amountMoved[i] -= moveDistance;
             } else {
                 elem.translateOnAxis(elem.position, -amountMoved[i]);
                 elem.rotation.set(0,0,0);
-                // elem.position = originalpos[i];
+                console.log(elem.children[0].position)
+                console.log(originalpos[i])
+                elem.position.copy(originalpos[i]);
                 toRemove.push(i);
             }
         }
@@ -333,13 +378,17 @@ function handlePopping() {
     }
 }
 
-for(var i = 0; i < momentNames.length - 1; i++) {
+for(var i = 0; i < momentNames.length; i++) {
     const momentName = momentNames[i];
     document.getElementById(momentName).idx = i;
     document.getElementById(momentName).addEventListener('mouseover', (evt) => {
         const idx = evt.currentTarget.idx;
+        console.log('hovering', momentName)
         console.log(idx)
         hover(isosp.children[idx].children[0].children[0], false);
+    });
+    document.getElementById(momentName).addEventListener('mouseout', (evt) => {
+        unhover();
     });
 }
 

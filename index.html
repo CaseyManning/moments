@@ -3,70 +3,159 @@
   <head>
     <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-app.js"></script>
     <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-firestore.js"></script>
-    <link rel="stylesheet" href="index.css" />
-    <script src="index.js"></script>
+    <link rel="stylesheet" href="index_re.css" />
   </head>
   <body>
-    <div class="box" id="box1">
+    <div class="box" id="sidepanel">
       <p id="title">a moment of casey</p>
-      <a href="tides.html">latest</a>
-      <a href="#" onclick="showArchives()">archives</a>
-
-      <a href="https://buttondown.email/moments">subscribe</a>
-    </div>
-    <!-- <p class="greyed" style="font-size: 9pt; position: absolute; bottom: 15px; left: 0; right: 0; margin: auto; width:60%; z-index: 1;">The Moments Association of America would like to remind you that all moments are works of fiction, and any similarity to actual persons, living or dead, or actual events, is purely coincidental.</p> -->
-    <div class="box hidden" id="box2" style="padding-bottom: 30px">
-      <p id="title">a moment of casey</p>
-      <a target="_blank" href="tides.html">38. tides</a>
-      <a target="_blank" href="hands.html">37. hands</a>
-      <a target="_blank" href="trout.html">36. trout</a>
-      <a target="_blank" href="plot.html">35. plot</a>
+      <a target="_blank" href="tides.html" id="tides" class="first">
+        <span>38.</span>
+        <span>tides</span>
+      </a>
+      <a target="_blank" href="hands.html" id="hands">
+        <span>37.</span>
+        <span>hands</span>
+      </a>
+      <a target="_blank" href="trout.html" id="trout">
+        <span>36.</span>
+        <span>trout</span>
+      </a>
+      <a target="_blank" href="plot.html" id="plot">
+        <span>35.</span>
+        <span>plot</span>
+      </a>
       <!-- <a target="_blank" href="monastery.html">34. monastery</a> -->
-      <a></a>
-      <a target="_blank" href="benches.html">33. benches</a>
-      <a target="_blank" href="milk.html">32. milk</a>
+      <p></p>
+      <a target="_blank" href="benches.html" id="benches">
+        <span>33.</span>
+        <span>benches</span>
+      </a>
+      <a target="_blank" href="milk.html" id="milk">
+        <span>32.</span>
+        <span>milk</span>
+      </a>
       <!-- <a target="_blank" href="voicenote.html">31. voicenote</a> -->
-      <a></a>
-      <a target="_blank" href="summer.html">30. summer</a>
-      <a target="_blank" href="canada.html">29. canada</a>
-      <a target="_blank" href="apple.html">28. apple</a>
-      <a target="_blank" href="bricks.html">27. bricks</a>
-      <a target="_blank" href="syringe.html">26. syringe</a>
-      <a target="_blank" href="consumption.html">25. consumption</a>
+      <p></p>
+      <a target="_blank" href="summer.html" id="summer">
+        <span>30.</span>
+        <span>summer</span>
+      </a>
+      <a target="_blank" href="canada.html" id="canada">
+        <span>29.</span>
+        <span>canada</span>
+      </a>
+      <a target="_blank" href="apple.html" id="apple">
+        <span>28.</span>
+        <span>apple</span>
+      </a>
+      <a target="_blank" href="bricks.html" id="bricks">
+        <span>27.</span>
+        <span>bricks</span>
+      </a>
+      <a target="_blank" href="syringe.html" id="syringe">
+        <span>26.</span>
+        <span>syringe</span>
+      </a>
+      <a target="_blank" href="consumption.html" id="consumption">
+        <span>25.</span>
+        <span>consumption</span>
+      </a>
       <!-- <a target="_blank" href="notes.html">24. notes</a> -->
-      <a></a>
-      <a target="_blank" href="book.html">23. book</a>
-      <a target="_blank" href="nothing.html">22. nothing</a>
-      <a target="_blank" href="pancakes.html">21. pancakes</a>
-      <a target="_blank" href="elevator.html">20. elevator</a>
-      <a target="_blank" href="porkbun.html">19. pork bun</a>
-      <a target="_blank" href="standing.html">18. standing</a>
-      <a target="_blank" href="chop.html">17. chop</a>
-      <a target="_blank" href="funny.html">16. funny</a>
+      <p></p>
+      <a target="_blank" href="book.html" id="book">
+        <span>23.</span>
+        <span>book</span>
+      </a>
+      <a target="_blank" href="nothing.html" id="nothing">
+        <span>22.</span>
+        <span>nothing</span>
+      </a>
+      <a target="_blank" href="pancakes.html" id="pancakes">
+        <span>21.</span>
+        <span>pancakes</span>
+      </a>
+      <a target="_blank" href="elevator.html" id="elevator">
+        <span>20.</span>
+        <span>elevator</span>
+      </a>
+      <a target="_blank" href="porkbun.html" id="porkbun">
+        <span>19.</span>
+        <span>pork bun</span>
+      </a>
+      <a target="_blank" href="standing.html" id="standing">
+        <span>18.</span>
+        <span>standing</span>
+      </a>
+      <a target="_blank" href="chop.html" id="chop">
+        <span>17.</span>
+        <span>chop</span>
+      </a>
+      <a target="_blank" href="funny.html" id="funny">
+        <span>16.</span>
+        <span>funny</span>
+      </a>
       <!-- <a target="_blank" href="duck.html">15. duck</a> -->
-      <a></a>
-      <a target="_blank" href="bye.html">14. bye</a>
-      <a target="_blank" href="ari.html">13. ari</a>
-      <a target="_blank" href="jokes.html">12. jokes</a>
-      <a target="_blank" href="arch.html">11. arch</a>
+      <p></p>
+      <a target="_blank" href="bye.html">
+        <span>14.</span>
+        <span>bye</span>
+      </a>
+      <a target="_blank" href="ari.html">
+        <span>13.</span>
+        <span>ari</span>
+      </a>
+      <a target="_blank" href="jokes.html">
+        <span>12.</span>
+        <span>jokes</span>
+      </a>
+      <a target="_blank" href="arch.html">
+        <span>11.</span>
+        <span>arch</span>
+      </a>
       <!-- <a target="_blank" href="averages.html">10. averages</a> -->
-      <a></a>
-      <a target="_blank" href="remember.html">9. remember</a>
-      <a target="_blank" href="becoming.html">8. becoming</a>
-      <a target="_blank" href="songs.html">7. songs</a>
-      <a target="_blank" href="shower.html">6. shower</a>
+      <p></p>
+      <a target="_blank" href="remember.html">
+        <span>9.</span>
+        <span>remember</span>
+      </a>
+      <a target="_blank" href="becoming.html">
+        <span>8.</span>
+        <span>becoming</span>
+      </a>
+      <a target="_blank" href="songs.html">
+        <span>7.</span>
+        <span>songs</span>
+      </a>
+      <a target="_blank" href="shower.html">
+        <span>6.</span>
+        <span>shower</span>
+      </a>
       <!-- <a target="_blank" href="text.html">5. text</a> -->
-      <a></a>
-      <a target="_blank" href="choosing.html">4. choosing</a>
-      <a target="_blank" href="tired.html">3. tired</a>
-      <a target="_blank" href="phonecall.html">2. phonecall</a>
-      <!-- <a target="_blank" href="bathroom.html">1. bathroom</a> -->
-      <a></a>
+      <p></p>
+      <a target="_blank" href="choosing.html">
+        <span>4.</span>
+        <span>choosing</span>
+      </a>
+      <a target="_blank" href="tired.html">
+        <span>3.</span>
+        <span>tired</span>
+      </a>
+      <a target="_blank" href="phonecall.html">
+        <span>2.</span>
+        <span>phonecall</span>
+      </a>
+      <p style="padding-bottom: 30px"></p>
     </div>
+    <p id="td_label">label test</p>
+    <p id="td_label2">label test 2</p>
+    <div id="canvas-container"></div>
+
+    <a href="https://buttondown.email/moments" id="subscribe">subscribe!</a>
+
     <script src="three.min.js"></script>
     <script src="gltfloader.js"></script>
     <script src="OrbitControls.js"></script>
     <script src="keyboardstate.js"></script>
-    <script src="rotator.js"></script>
+    <script src="rotator_re.js"></script>
   </body>
 </html>

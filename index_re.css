@@ -5,6 +5,7 @@ body {
   margin: 0 !important;
   padding: 0 !important;
   height: 100%;
+  overflow-x: hidden;
 }
 
 body {
@@ -21,10 +22,10 @@ body {
   margin-bottom: 15px;
 }
 
-#td_label {
+#td_label,
+#td_label2 {
   font-family: "Space Mono", monospace;
   display: none;
-  border: 1px solid black;
   position: absolute;
   z-index: 10;
   top: 0;
@@ -35,6 +36,15 @@ body {
   font-size: 13pt;
   cursor: pointer;
   pointer-events: none;
+}
+
+#td_label {
+  border: 1px solid black;
+}
+
+#td_label2 {
+  background-color: black;
+  padding: 0px 0px;
 }
 
 hr {
@@ -126,4 +136,13 @@ p {
   color: #888;
   font-size: 13pt;
   font-family: monospace;
+}
+
+#subscribe {
+  font-family: "Space Mono", monospace;
+  color: #111;
+  position: absolute;
+  bottom: 20px;
+  right: 30px;
+  font-size: 13pt;
 }
