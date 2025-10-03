@@ -10,6 +10,8 @@ var basetree;
 var isosp;
 
 const momentNames = [
+    "triplet",
+    "tides",
     "consumption",
     "bricks",
     "apple",
@@ -21,10 +23,10 @@ const momentNames = [
     "trout",
     "hands",
     "syringe",
-    "tides",
 ]
 
 const numbers = {
+    "triplet": "0039",
     "tides": "0038",
     "hands": "0037",
     "trout": "0036",
@@ -89,6 +91,10 @@ const newStoryMat = new THREE.MeshBasicMaterial({
     wireframe: true
 });
 
+const centerMat = new THREE.MeshBasicMaterial({
+    color: 0x000000,
+});
+
 loader.load('iso_re.glb', function ( gltf ) {
 
     isosp = gltf.scene;
@@ -101,34 +107,37 @@ loader.load('iso_re.glb', function ( gltf ) {
         isosp.remove(face);
         isosp.add( pivot );
         pivot.attach(face);
-        // face.scale.set(3,3,3);
-        
-        const edgeMat = new THREE.MeshBasicMaterial({
-            color: 0x000000,
-            transparent: true,
-            opacity: 0
-        });
+
         face.children[0].material = defaultMat;
         const secondFace = face.children[0].clone();
         secondFace.material = noHoverMat;
         face.add(secondFace);
 
         face.remove(face.children[1]);
-        // face.children[1].material = edgeMat;
-        if(i == 0) {
-            face.firstStory = true;
-            // face.children[0].material = newStoryMat;
-        }
     }
     isosp.scale.set(4,4,4);
-    // isosp.position.set(2,0, 0);
     isosp.rotation.x = 0.5
-
     scene.add(isosp);
-    
-}, undefined, function ( error ) {
-    console.error( error );
-} );
+});
+
+if(window.localStorage.getItem('anyclicked') == 'true') {
+    loader.load('icocenter.glb', function ( gltf ) {
+
+        icocenter = gltf.scene.children[0];
+        icocenter.position.y = 0;
+
+        icocenter.scale.set(0.5, 0.5, 0.5);
+
+        console.log(icocenter)
+
+        icocenter.material = centerMat;
+
+        icocenter.rotation.x = 0.5
+        scene.add(icocenter);
+    });
+}
+
+
 
 var canvasarea = document.getElementById("canvas-container");
 
@@ -337,8 +346,6 @@ function handlePopping() {
         }
         popDistance[index] = dist;
         originalpos[index] = isosp.children[index].children[0].position.clone();
-        console.log('setting originalpos', originalpos[index])
-
     }
     var toRemove = [];
     for(var i of popping) {
@@ -381,6 +388,9 @@ function handlePopping() {
 for(var i = 0; i < momentNames.length; i++) {
     const momentName = momentNames[i];
     document.getElementById(momentName).idx = i;
+    document.getElementById(momentName).addEventListener('click', (evt) => {
+        window.localStorage.setItem('anyclicked', 'true');
+    });
     document.getElementById(momentName).addEventListener('mouseover', (evt) => {
         const idx = evt.currentTarget.idx;
         console.log('hovering', momentName)
