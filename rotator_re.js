@@ -10,6 +10,7 @@ var basetree;
 var isosp;
 
 const momentNames = [
+    "world-interchange",
     "triplet",
     "tides",
     "consumption",
@@ -26,6 +27,7 @@ const momentNames = [
 ]
 
 const numbers = {
+    "world-interchange": "0040",
     "triplet": "0039",
     "tides": "0038",
     "hands": "0037",
