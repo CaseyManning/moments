@@ -520,8 +520,6 @@ const messages = [
     "Also casey side note. i really appreciate you. get home safeeeee",
     "casey is that ok?",
     "GOT IT THANKS CASEY",
-    "I'm watching casey's smile creep onto his face",
-    "casey better watch his back",
     "Casey help, how to quit discord",
     "Casey I just took a post clinic nap",
     "I'm so excited for it casey",
