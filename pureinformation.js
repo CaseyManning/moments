@@ -634,7 +634,16 @@ const messages = [
     "oh casey and i might also go to banya in early evening (say 5-8?) for our new years mikveh",
     "am gonna pick up casey and actually have a bunch of extra time, anyone else need a ride lol",
     "cant believe casey has real website before i do",
-    "website for casey????"
+    "website for casey????",
+    "i disastered casey",
+    "what if my domain was casey.business",
+    "casey.watches.you",
+    "you are casey :)",
+    "send the Casey Collection",
+    "casey i dont have any pants",
+    "gatekeeping caseyness",
+    "new behavior: chasing casey",
+    "it feels like a compelling slice of casey life"
 ];
 
 
