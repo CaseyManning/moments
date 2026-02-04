@@ -36,7 +36,6 @@ const messages = [
     "that sounds way more casey, glad you found ways to pull strings",
     "well I guess this maybe harms my casey provides the grandkiddos strategy but",
     "im going to be honest casey the fact you’re doing this at all baffles me",
-    "i don't think that's true casey",
     "I'll hold onto your water bottle and headphones. You can come by and get them back, or I'll bring them over whenever we next see each other. Goodnight, Casey.",
     "ah was driving home and i was like.. huh i wonder what caseys up to",
     "no worries dear casey hope u r doing fantastic",
@@ -288,6 +287,7 @@ const messages = [
     "It’s over casey. But when the night is darkest the sun begins to rise. We must rally",
     "Thanks for sending Casey ",
     "Source: Casey here",
+    "yay you should do it!!! also I was literally just playing ghost train and Casey it is so good!!!!! (charlie scares me a little LOL)",
     "Now’s your chance casey",
     "I can’t do this casey ",
     "So Casey bestie ",
@@ -331,6 +331,7 @@ const messages = [
     "casey both my friend groups do every week",
     "i just googled if casey is cognate with queso",
     "like maybe the first casey was a cheese maker",
+    "Casey, You up for a Go game tomorrow?",
     "casey why does ur websites click and drag ball thing have a north and south pole that u can’t drag over",
     "i don’t mean go back to old casey",
     "caseyy im so excited for the picnic",
@@ -358,6 +359,7 @@ const messages = [
     "casey he's not cute",
     "wtfff casey text",
     "casey i dont have edit access",
+    "casey 2 of them put lockheed martin as an interest",
     "casey i don’t think i can survive this quarter",
     "casey this is not ambiguous",
     "casey noooo",
@@ -525,6 +527,7 @@ const messages = [
     "I'm so excited for it casey",
     "Casey ur photography is so cool!!",
     "Lmaoooo casey",
+    "Casey is this just you getting the baby fever??",
     "changing Casey's contact name once again",
     "Nooo but vanilla extract is so good casey why is this a bad thing",
     "THATS SO BAD CASEY WHATTT",
@@ -628,6 +631,10 @@ const messages = [
     "casey i just watched myself fail a billion hard leetcodes u don’t wanna trust me with ur career",
     "this is the ant-casey",
     "I may disagree, but casey is able to do critical thinking",
+    "oh casey and i might also go to banya in early evening (say 5-8?) for our new years mikveh",
+    "am gonna pick up casey and actually have a bunch of extra time, anyone else need a ride lol",
+    "cant believe casey has real website before i do",
+    "website for casey????"
 ];
 
 
@@ -726,7 +733,7 @@ function shuffle() {
     for (let i = 0; i < textSpans.length; i++) {
         const y = textSpans[i].getBoundingClientRect().y;
 
-        if(y < -50) {
+        if (y < -50) {
             document.getElementById("message-container").removeChild(textSpans[i].parentElement);
             textSpans.splice(i, 1);
             i--;
@@ -734,17 +741,17 @@ function shuffle() {
         }
 
         const orig = textSpans[i].title;
-        
+
         const factor = (window.innerHeight - y) / window.innerHeight / 2 - 0.3;
         let newText = "";
 
-        for(let j = 0; j < orig.length; j++) {
-        const char = orig[j];
-        if(Math.random() < factor) {
-            newText += orig[Math.floor(Math.random() * orig.length)];
-        } else {
-            newText += char;
-        }
+        for (let j = 0; j < orig.length; j++) {
+            const char = orig[j];
+            if (Math.random() < factor) {
+                newText += orig[Math.floor(Math.random() * orig.length)];
+            } else {
+                newText += char;
+            }
         }
 
         textSpans[i].textContent = newText;
