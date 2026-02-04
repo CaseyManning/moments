@@ -641,7 +641,17 @@ const messages = [
     "casey i dont have any pants",
     "gatekeeping caseyness",
     "new behavior: chasing casey",
-    "it feels like a compelling slice of casey life"
+    "it feels like a compelling slice of casey life",
+    "And like I’m in the “huge Casey believers club, dependent on artistic and career decisions over the next ten years, for which there is great tolerance/open space”",
+    "I'm a very romantic person Casey",
+    "I believe in the Casey Charm /srs",
+    "but casey charm is real ❤️",
+    "ok check it: casey.you",
+    "\"casey business\" was determined to be slightly too silly.",
+    "i’m just offended by the level of casey non-flourishing entailed",
+    "i would really kill for casey girlfriends prose",
+    "saw someone in old casey uniform just now",
+    "strategic realignments in casey’s favor"
 ];
 
 
