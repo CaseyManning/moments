@@ -10,7 +10,7 @@ var basetree;
 var isosp;
 
 const momentNames = [
-    "love-hate",
+    // "love-hate",
     "superfluous",
     "world-interchange",
     "triplet",
@@ -29,7 +29,7 @@ const momentNames = [
 ]
 
 const numbers = {
-    "love-hate": "0042",
+    // "love-hate": "0042",
     "superfluous": "0041",
     "world-interchange": "0040",
     "triplet": "0039",
