@@ -11,6 +11,7 @@ var isosp;
 
 const momentNames = [
     // "love-hate",
+    "departure",
     "superfluous",
     "world-interchange",
     "triplet",
@@ -29,6 +30,7 @@ const momentNames = [
 ]
 
 const numbers = {
+    "departure": "0043",
     // "love-hate": "0042",
     "superfluous": "0041",
     "world-interchange": "0040",
